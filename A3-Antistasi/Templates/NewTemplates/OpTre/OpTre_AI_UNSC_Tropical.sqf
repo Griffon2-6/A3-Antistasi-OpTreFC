@@ -175,7 +175,7 @@ _loadoutData setVariable ["items_unarmed_extras", []];
 
 private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _sfLoadoutData setVariable ["uniforms", ["OPTRE_UNSC_Army_Uniform_OLITRO_SlimLeg", "OPTRE_UNSC_Army_Uniform_OLI_SlimLeg"]];
-_sfLoadoutData setVariable ["vests", ["OPTRE_UNSC_M52D_Armor", "OPTRE_UNSC_M52D_Armor_Rifleman", "OPTRE_UNSC_M52D_Light"]];
+_sfLoadoutData setVariable ["vests", ["OPTRE_UNSC_M52D_Armor", "OPTRE_UNSC_M52D_Armor_Rifleman", "OPTRE_UNSC_M52D_Armor_Light"]];
 _sfLoadoutData setVariable ["backpacks", ["OPTRE_ILCS_Rucksack_Black", "OPTRE_ILCS_Rucksack_Heavy", "OPTRE_ILCS_Rucksack_Heavy_M73"]];
 _sfLoadoutData setVariable ["helmets", ["OPTRE_UNSC_CH252D_Helmet"]];
 _sfLoadoutData setVariable ["binoculars", ["OPTRE_Smartfinder"]];
@@ -311,7 +311,7 @@ _militiaLoadoutData setVariable ["machineGuns", [
 ["OPTRE_M247", "", "", "", ["OPTRE_100Rnd_762x51_Box", "OPTRE_100Rnd_762x51_Box", "OPTRE_100Rnd_762x51_Box_Tracer_Yellow"], [], "bipod_01_F_blk"]
 ]];
 _militiaLoadoutData setVariable ["marksmanRifles", [
-["OPTRE_M392_DMR", "", "", "OPTRE_M392_Scope", [], [], "bipod_01_F_blk"],
+["OPTRE_M392_DMR", "", "", "OPTRE_M392_Scope", [], [], "bipod_01_F_blk"]
 ]];
 _militiaLoadoutData setVariable ["sidearms", [["OPTRE_M6G", "", "OPTRE_M6G_Flashlight", "", [], [], ""]]];
 
