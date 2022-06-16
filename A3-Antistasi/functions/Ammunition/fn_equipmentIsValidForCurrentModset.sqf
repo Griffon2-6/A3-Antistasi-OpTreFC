@@ -108,6 +108,44 @@ if (A3A_hasVN && {(_itemIsVanilla || _itemMod in _acemods || _itemMod in _TFARmo
 	};
 };
 
+if (A3A_hasOpTre && {(_itemIsVanilla || _itemMod in _acemods || _itemMod in _TFARmods)}) exitWith {
+	switch (_categories select 0) do {
+		case "Item": {
+			switch (_categories select 1) do {
+				case "AccessoryMuzzle";
+				case "AccessoryPointer";
+				case "AccessorySights";
+				case "LaserDesignator";
+				case "Radio";
+				case "Compasses";
+				case "Unknown": { false };
+				default { true };
+			};
+		};
+		case "Weapon" : {false};
+		case "Equipment": {
+			switch (_categories select 1) do {
+				case "Headgear": {
+					if (getNumber (_configClass >> "ItemInfo" >> "HitpointsProtectionInfo" >> "Head" >> "armor") < 0.1) then { true };
+				};
+				case "Vest": {
+					if (getNumber (_configClass >> "ItemInfo" >> "HitpointsProtectionInfo" >> "Chest" >> "armor") < 12.1) then { true };
+				};
+				default { true };
+			};
+		};
+		case "Magazine" : {false};
+		case "Mine": { 
+			switch {_configClass} do {
+				case "ATMine_Range_Mag": {false};
+				case "SLAMDirectionalMine_Wire_Mag": {false};
+				default { true };
+			};
+		};
+		default { true };
+	};
+};
+
 //no other CDLC content when using VN
 if (A3A_hasVN && {toLower _itemMod isNotEqualTo "vn"} && {toLower _itemMod in (allCDLC apply {toLower (_x#1)})}) exitWith {false};
 
