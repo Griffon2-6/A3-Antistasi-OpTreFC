@@ -25,11 +25,23 @@ private _faction = [[_factionDefaultFile,_file]] call A3A_fnc_loadFaction;
 private _factionPrefix = ["occ", "inv", "reb", "civ"] #([west, east, independent, civilian] find _side);
 missionNamespace setVariable ["A3A_faction_" + _factionPrefix, _faction, true];  // ["A3A_faction_occ", "A3A_faction_inv", "A3A_faction_reb", "A3A_faction_civ"]
 
-private _baseUnitClass = switch (_side) do {
-	case west: { "B_G_Soldier_F" };
-	case east: { "O_G_Soldier_F" };
-	case independent: { "I_G_Soldier_F" };
-	case civilian: { "C_Man_1" };
+private _baseUnitClass = switch (true) do {
+	case (A3A_hasOpTre) : {
+		switch (_side) do {
+			case west: { "OPTRE_UNSC_Marine_Soldier_Rifleman_BR" };
+			case east: { "OPTRE_FC_Elite_Major" };
+			case independent: { "I_G_Soldier_F" };
+			case civilian: { "C_Man_1" };
+		};
+	};
+	default {
+		switch (_side) do {
+			case west: { "B_G_Soldier_F" };
+			case east: { "O_G_Soldier_F" };
+			case independent: { "I_G_Soldier_F" };
+			case civilian: { "C_Man_1" };
+		};
+	};
 };
 
 private _unitClassMap = if (_side isNotEqualTo independent) then { createHashMap } else {

@@ -271,9 +271,9 @@ _militaryLoadoutData setVariable ["sidearms", [
 
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
-_policeLoadoutData setVariable ["uniforms", ["U_B_GEN_Soldier_F", "U_B_GEN_Commander_F"]];
-_policeLoadoutData setVariable ["vests", ["V_TacVest_blk_POLICE"]];
-_policeLoadoutData setVariable ["helmets", ["H_Cap_police"]];
+_policeLoadoutData setVariable ["uniforms", ["OPTRE_CPD_Uniform", "OPTRE_CPD_Uniform_Rolled"]];
+_policeLoadoutData setVariable ["vests", ["OPTRE_Vest_CPD_Light", "OPTRE_Vest_CPD_Heavy"]];
+_policeLoadoutData setVariable ["helmets", ["OPTRE_CPD_Cap", "OPTRE_CPD_Beret"]];
 
 _policeLoadoutData setVariable ["smgs", [
 ["OPTRE_M7", "", "", "OPTRE_M393_EOTECH", [], [], ""],
@@ -320,8 +320,8 @@ _militiaLoadoutData setVariable ["sidearms", [["OPTRE_M6G", "", "OPTRE_M6G_Flash
 //////////////////////////
 
 private _crewLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
-_crewLoadoutData setVariable ["uniforms", ["OPTRE_FC_Marines_Uniform_WDL", "OPTRE_FC_Marines_Uniform_WDL_L"]];
-_crewLoadoutData setVariable ["vests", ["OPTRE_FC_M52B_Armor_Vest"]];
+_crewLoadoutData setVariable ["uniforms", ["OPTRE_UNSC_Army_Uniform_TRO", "OPTRE_UNSC_Army_Uniform_R_TRO"]];
+_crewLoadoutData setVariable ["vests", ["OPTRE_UNSC_M52A_Armor3_WDL"]];
 _crewLoadoutData setVariable ["helmets", ["H_HelmetCrew_B"]];
 
 private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
