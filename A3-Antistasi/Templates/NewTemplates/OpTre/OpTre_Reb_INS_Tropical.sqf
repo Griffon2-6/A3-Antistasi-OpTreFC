@@ -8,6 +8,9 @@
 ["flagTexture", "\A3\Data_F_exp\Flags\Flag_Tanoa_CO.paa"] call _fnc_saveToTemplate; 				//this line determines the flag texture -- Example: ["flagTexture", "\A3\Data_F\Flags\Flag_NATO_CO.paa"] - ENTER ONLY ONE OPTION
 ["flagMarkerType", "flag_Tanoa"] call _fnc_saveToTemplate; 			//this line determines the flag marker type -- Example: ["flagMarkerType", "flag_NATO"] - ENTER ONLY ONE OPTION
 
+["firstAidKits", ["OPTRE_Biofoam"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
+["mediKits", ["OPTRE_Medkit"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
+
 ["vehicleBasic", "OPTRE_M274_ATV_Ins"] call _fnc_saveToTemplate; 			//this line determines basic vehicles, the lightest kind available. -- Example: ["vehiclesBasic", ["B_Quadbike_01_F"]] -- Array, can contain multiple assets
 ["vehicleLightUnarmed", "OPTRE_M12_FAV_ins"] call _fnc_saveToTemplate; 		//this line determines light and unarmed vehicles. -- Example: ["vehiclesLightUnarmed", ["B_MRAP_01_F"]] -- Array, can contain multiple assets
 ["vehicleLightArmed", "OPTRE_M12_LRV_ins"] call _fnc_saveToTemplate; 		//this line determines light and armed vehicles -- Example: ["vehiclesLightArmed",["B_MRAP_01_hmg_F","B_MRAP_01_gmg_F"]] -- Array, can contain multiple assets

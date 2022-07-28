@@ -103,7 +103,10 @@ for "_i" from 1 to _vehicleCount do
     if (_vehicleData isEqualType []) then
     {
         _vehicles pushBack (_vehicleData select 0);
-        _groups pushBack (_vehicleData select 1);
+        if !(isNull (_vehicleData select 1)) then
+        {
+            _groups pushBack (_vehicleData select 1);
+        };
         if !(isNull (_vehicleData select 2)) then
         {
             _groups pushBack (_vehicleData select 2);

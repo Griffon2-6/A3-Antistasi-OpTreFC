@@ -44,7 +44,7 @@ private _baseUnitClass = switch (true) do {
 	};
 };
 
-private _unitClassMap = if (_side isNotEqualTo independent) then { createHashMap } else {
+private _unitClassMap = if (_side isNotEqualTo independent) then { createHashMap } else { //TODO: define HashMaps for other sides to implement OpTre Spartans and Jackals
 	createHashMapFromArray [				// Cases matter. Lower case here because allVariables on namespace returns lowercase
 		["militia_unarmed", "I_G_Survivor_F"],
 		["militia_rifleman", "I_G_Soldier_F"],
@@ -347,6 +347,32 @@ if (_side isEqualTo west) then {
 		"loadouts_occ_SF_LAT",
 		"loadouts_occ_SF_Medic"
 	];
+
+	if (A3A_hasOpTre) then {
+		groupsUNSCODSTQRF = [
+			"loadouts_occ_SF_SquadLeader",
+			"loadouts_occ_SF_Shock",
+			"loadouts_occ_SF_Shock",
+			"loadouts_occ_SF_Medic",
+			"loadouts_occ_SF_Rifleman",
+			"loadouts_occ_SF_Rifleman",
+			"loadouts_occ_SF_MachineGunner",
+			"loadouts_occ_SF_Grenadier",
+			"loadouts_occ_SF_LAT",
+			"loadouts_occ_SF_AT",
+			"loadouts_occ_SF_AA",
+			"loadouts_occ_SF_Engineer"
+		];
+
+		NATOSpecOp = [
+		"loadouts_occ_SF_SquadLeader",
+		"loadouts_occ_SF_Rifleman",
+		"loadouts_occ_SF_Marksman",
+		"loadouts_occ_SF_ExplosivesExpert",
+		"loadouts_occ_SF_LAT",
+		"loadouts_occ_SF_Medic"
+		];
+	};
 
 	if (gameMode != 4) then {
 		groupsFIASmall = [

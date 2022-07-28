@@ -23,7 +23,7 @@
 ["vehiclesBasic", ["OPTRE_M274_ATV"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["OPTRE_M12_FAV_APC"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed",["OPTRE_M12G1_LRV", "OPTRE_M12_LRV"]] call _fnc_saveToTemplate;
-["vehiclesTrucks", ["OPTRE_m1087_stallion_unsc", "OPTRE_m1087_stallion_cover_unsc"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["OPTRE_M813_TT", "OPTRE_m1087_stallion_cover_unsc"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["OPTRE_m1087_stallion_unsc", "OPTRE_m1087_stallion_cover_unsc", "OPTRE_M813_TT"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["OPTRE_m1087_stallion_unsc_resupply"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["OPTRE_m1087_stallion_unsc_repair"]] call _fnc_saveToTemplate;
@@ -45,8 +45,8 @@
 ["vehiclesPlanesTransport", []] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["OPTRE_UNSC_falcon"]] call _fnc_saveToTemplate;
-["vehiclesHelisTransport", ["OPTRE_Pelican_armed"]] call _fnc_saveToTemplate;
-["vehiclesHelisAttack", ["OPTRE_UNSC_hornet", "OPTRE_AV22B_Sparrowhawk"]] call _fnc_saveToTemplate;
+["vehiclesHelisTransport", ["OPTRE_Pelican_unarmed"]] call _fnc_saveToTemplate;
+["vehiclesHelisAttack", ["OPTRE_UNSC_hornet", "OPTRE_AV22B_Sparrowhawk", "OPTRE_Pelican_armed_70mm"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", [
 ["B_T_MBT_01_arty_F", ["32Rnd_155mm_Mo_shells"]],
@@ -510,7 +510,7 @@ private _latTemplate = {
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
-	[selectRandom ["rifles"]] call _fnc_setPrimary;
+	["rifles"] call _fnc_setPrimary;
 	["primary", 6] call _fnc_addMagazines;
 
 	[["lightATLaunchers", "ATLaunchers"] call _fnc_fallback] call _fnc_setLauncher;
@@ -539,7 +539,7 @@ private _atTemplate = {
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
-	[selectRandom ["rifles"]] call _fnc_setPrimary;
+	["rifles"] call _fnc_setPrimary;
 	["primary", 6] call _fnc_addMagazines;
 
 	[selectRandom ["ATLaunchers", "missileATLaunchers"]] call _fnc_setLauncher;
@@ -568,7 +568,7 @@ private _aaTemplate = {
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
-	[selectRandom ["rifles"]] call _fnc_setPrimary;
+	["rifles"] call _fnc_setPrimary;
 	["primary", 6] call _fnc_addMagazines;
 
 	["AALaunchers"] call _fnc_setLauncher;
@@ -668,6 +668,28 @@ private _sniperTemplate = {
 	["NVGs"] call _fnc_addNVGs;
 };
 
+private _shockTemplate = {
+	["helmets"] call _fnc_setHelmet;
+	["vests"] call _fnc_setVest;
+	["uniforms"] call _fnc_setUniform;
+
+	["smgs"] call _fnc_setPrimary;
+	["primary", 8] call _fnc_addMagazines;
+
+	["sidearms"] call _fnc_setHandgun;
+	["handgun", 2] call _fnc_addMagazines;
+
+	["items_medical_standard"] call _fnc_addItemSet;
+	["items_miscEssentials"] call _fnc_addItemSet;
+	["antiInfantryGrenades", 2] call _fnc_addItem;
+	["smokeGrenades", 2] call _fnc_addItem;
+
+	["maps"] call _fnc_addMap;
+	["watches"] call _fnc_addWatch;
+	["compasses"] call _fnc_addCompass;
+	["radios"] call _fnc_addRadio;
+};
+
 private _policeTemplate = {
 	["helmets"] call _fnc_setHelmet;
 	["vests"] call _fnc_setVest;
@@ -756,7 +778,8 @@ private _unitTypes = [
 	["AA", _aaTemplate],
 	["MachineGunner", _machineGunnerTemplate],
 	["Marksman", _marksmanTemplate],
-	["Sniper", _sniperTemplate]
+	["Sniper", _sniperTemplate],
+	["Shock", _shockTemplate]
 ];
 
 [_prefix, _unitTypes, _sfLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
