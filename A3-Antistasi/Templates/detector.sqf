@@ -22,6 +22,7 @@ A3A_hasTCGM = false;
 A3A_hasADV = false;
 A3A_hasD3S = false;
 A3A_hasRDS = false;
+A3A_hasOpTre = false;
 
 //Actual Detection
 //IFA Detection
@@ -54,6 +55,9 @@ if (allowDLCVN && isClass (configFile >> "CfgPatches" >> "vn_weapons")) then {A3
 
 //FFAA Detection
 if (isClass (configfile >> "CfgPatches" >> "ffaa_armas")) then {A3A_hasFFAA = true; Info("FFAA Detected.") };
+
+//Operation Trebuchet Detection
+if (isClass (configfile >> "CfgPatches" >> "OPTRE_Core")) then {A3A_hasOpTre = true; Info("Operation Trebuchet Detected.") };
 
 //Ivory Car Pack Detection
 if (isClass (configfile >> "CfgPatches" >> "Ivory_Data")) then {A3A_hasIvory = true; Info("Ivory Cars Detected.") };

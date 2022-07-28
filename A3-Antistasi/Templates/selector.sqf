@@ -56,6 +56,21 @@ A3A_Reb_template = switch(true) do {
         Info("Using Pissed off Farmers Template");
         "VN"
     };
+	case (A3A_hasOpTre): {
+        switch(true) do {
+            case (toLower worldName in arcticmaps);
+            case (toLower worldName in temperatemaps);
+            case (toLower worldName in tropicalmaps): {
+                Info("Using Tropical Insurrectionist Template");
+                ["Templates\NewTemplates\OpTre\OpTre_Reb_INS_Tropical.sqf", independent] call A3A_fnc_compatibilityLoadFaction;
+            };
+            default {
+                Info("Using Arid Insurrectionist Template");
+                ["Templates\NewTemplates\OpTre\OpTre_Reb_INS_Arid.sqf", independent] call A3A_fnc_compatibilityLoadFaction;
+            };
+        };
+        "OpTre"
+    };
     /* disabled until imtegrated
     case (A3A_hasIFA): {
       switch(true) do {
@@ -203,6 +218,21 @@ A3A_Occ_template = switch(true) do {
         Info("Using VN PAVN Template");
         "VN"
     };
+	case (A3A_hasOpTre): {
+        switch(true) do {
+            case (toLower worldName in arcticmaps);
+            case (toLower worldName in temperatemaps);
+            case (toLower worldName in tropicalmaps): {
+                Info("Using Tropical UNSC Template");
+                ["Templates\NewTemplates\OpTre\OpTre_AI_UNSC_Tropical.sqf", west] call A3A_fnc_compatibilityLoadFaction;
+            };
+            default {
+                Info("Using Arid UNSC Template");
+                ["Templates\NewTemplates\OpTre\OpTre_AI_UNSC_Arid.sqf", west] call A3A_fnc_compatibilityLoadFaction;
+            };
+        };
+        "OpTre"
+    };
     /* disabled until imtegrated
     case (A3A_hasIFA): {
         switch(true) do {
@@ -293,6 +323,11 @@ A3A_Inv_template = switch(true) do {
         Info("Using VN MACV Template");
         "VN"
     };
+	case (A3A_hasOpTre): {
+        ["Templates\NewTemplates\OpTre\OpTre_AI_Covenant.sqf", east] call A3A_fnc_compatibilityLoadFaction;
+        Info("Using Covenant Template");
+        "OpTre"
+    };
     /* disabled until imtegrated
     case (A3A_hasIFA): {
         switch(true) do {
@@ -359,6 +394,11 @@ A3A_Civ_template = switch(true) do {
     case (A3A_hasVN): {
         ["Templates\NewTemplates\VN\VN_CIV.sqf", civilian] call A3A_fnc_compatibilityLoadFaction;
         Info("Using VN CIV Template");
+        "VN"
+    };
+	case (A3A_hasOpTre): {
+        ["Templates\NewTemplates\OpTre\OpTre_CIV.sqf", civilian] call A3A_fnc_compatibilityLoadFaction;
+        Info("Using Operation Trebuchet Civ Template");
         "VN"
     };
     /* disabled until imtegrated

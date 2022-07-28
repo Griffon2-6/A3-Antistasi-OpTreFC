@@ -21,55 +21,103 @@ FIX_LINE_NUMBERS()
         OBJECT : objNull if the spawning did not worked
 */
 
-private _vehicle = [_markerOrigin, _vehicleType] call A3A_fnc_spawnVehicleAtMarker;
+private "_vehicle";
+private "_crewGroup";
+private "_cargoGroup";
 
-if(isNull _vehicle) exitWith {objNull};
-
-private _crewGroup = [_side, _vehicle] call A3A_fnc_createVehicleCrew;
+if (A3A_hasOpTre && _vehicleType == "OPTRE_HEV") then           // Special handling for OpTre ODST drop (should probably be a distinct support type in the future)
 {
-    [_x] call A3A_fnc_NATOinit
-} forEach (units _crewGroup);
-[_vehicle, _side] call A3A_fnc_AIVEHinit;
+    //[petros, "income", "Sending ODST QRF"] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
+    private _nPods = 6;                                         // Number of ODST pods, should scale with tierWar in future
+    private _vehicles = [];
+    for "_i" from 1 to _nPods do 
+    {
+        _vehicles pushBack (createVehicle [_vehicleType, getMarkerPos _markerOrigin, [], 5, "CAN_COLLIDE"]);
+    };
+    //[petros, "income",  ("_vehicles = " + format ["%1", _vehicles])] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
+    _vehicle = _vehicles select 0;
+    private _groupType = groupsUNSCODSTQRF;
+    _groupType resize _nPods;
+    _crewGroup = grpNull;
+    _cargoGroup = [getMarkerPos _markerOrigin, _side, _groupType, true, false] call A3A_fnc_spawnGroup;
 
-private _cargoGroup = grpNull;
-private _expectedCargo = ([_vehicleType, true] call BIS_fnc_crewCount) - ([_vehicleType, false] call BIS_fnc_crewCount);
-if (_expectedCargo > 0) then
+    private _defaultLandPos = _posDestination getPos [random 150, random 360];
+    _landPos = [_posDestination, 0, 150, 15, 0, 0, 0, [], [_defaultLandPos,_defaultLandPos]] call BIS_fnc_findSafePos;
+
+    {
+        ((units _cargoGroup) select _forEachIndex) assignAsGunner _x;
+        ((units _cargoGroup) select _forEachIndex) moveInGunner _x;
+        
+        _x setVariable ["OPTRE_PlayerControled",false,false];
+        _x setVariable ["HEV_hasPilot", true, true];
+
+        sleep 0.2;
+        
+        [_x, _landPos, 4000, 15, true] spawn tts_fnc_HEV_launchHev;
+
+    } forEach _vehicles;
+
+    private _cargoWP1 = _cargoGroup addWaypoint [_posDestination, 0];
+    _cargoWP1 setWaypointType "SAD";
+    _cargoWP1 setWaypointBehaviour "COMBAT";
+    _cargoWP1 setWaypointSpeed "FULL";
+
+    _landPosBlacklist pushBack _landPos;
+
+    ServerDebug_2("Spawn Performed: Created ODST drop with %1 pods", _nPods);
+}
+else 
 {
-    //Vehicle is able to transport units
-    private _groupType = if (_typeOfAttack == "Normal") then
+    _vehicle = [_markerOrigin, _vehicleType] call A3A_fnc_spawnVehicleAtMarker;
+
+    if(isNull _vehicle) exitWith {objNull};
+
+    _crewGroup = [_side, _vehicle] call A3A_fnc_createVehicleCrew;
     {
-        [_vehicleType, _side] call A3A_fnc_cargoSeats;
-    }
-    else
+        [_x] call A3A_fnc_NATOinit
+    } forEach (units _crewGroup);
+    [_vehicle, _side] call A3A_fnc_AIVEHinit;
+
+    _cargoGroup = grpNull;
+    private _expectedCargo = ([_vehicleType, true] call BIS_fnc_crewCount) - ([_vehicleType, false] call BIS_fnc_crewCount);
+    if (_expectedCargo > 0) then
     {
-        if (_typeOfAttack == "Air") then
+        //Vehicle is able to transport units
+        private _groupType = if (_typeOfAttack == "Normal") then
         {
-            if (_side == Occupants) then {groupsNATOAA} else {groupsCSATAA}
+            [_vehicleType, _side] call A3A_fnc_cargoSeats;
         }
         else
         {
-            if (_side == Occupants) then {groupsNATOAT} else {groupsCSATAT}
+            if (_typeOfAttack == "Air") then
+            {
+                if (_side == Occupants) then {groupsNATOAA} else {groupsCSATAA}
+            }
+            else
+            {
+                if (_side == Occupants) then {groupsNATOAT} else {groupsCSATAT}
+            };
         };
+
+        _cargoGroup = [getMarkerPos _markerOrigin, _side, _groupType, true, false] call A3A_fnc_spawnGroup;         // force spawn, should be pre-checked
+        {
+            _x assignAsCargo _vehicle;
+            _x moveInCargo _vehicle;
+            if !(isNull objectParent _x) then
+            {
+                [_x] call A3A_fnc_NATOinit;
+                _x setVariable ["originX", _markerOrigin];
+            }
+            else
+            {
+                deleteVehicle _x;
+            };
+        } forEach units _cargoGroup;
     };
 
-    _cargoGroup = [getMarkerPos _markerOrigin, _side, _groupType, true, false] call A3A_fnc_spawnGroup;         // force spawn, should be pre-checked
-    {
-        _x assignAsCargo _vehicle;
-        _x moveInCargo _vehicle;
-        if !(isNull objectParent _x) then
-        {
-            [_x] call A3A_fnc_NATOinit;
-            _x setVariable ["originX", _markerOrigin];
-        }
-        else
-        {
-            deleteVehicle _x;
-        };
-    } forEach units _cargoGroup;
+    _landPosBlacklist = [_vehicle, _crewGroup, _cargoGroup, _posDestination, _markerOrigin, _landPosBlacklist] call A3A_fnc_createVehicleQRFBehaviour;
+    ServerDebug_2("Spawn Performed: Created vehicle %1 with %2 soldiers", typeof _vehicle, count crew _vehicle);
 };
-
-_landPosBlacklist = [_vehicle, _crewGroup, _cargoGroup, _posDestination, _markerOrigin, _landPosBlacklist] call A3A_fnc_createVehicleQRFBehaviour;
-ServerDebug_2("Spawn Performed: Created vehicle %1 with %2 soldiers", typeof _vehicle, count crew _vehicle);
 
 private _vehicleData = [_vehicle, _crewGroup, _cargoGroup, _landPosBlacklist];
 _vehicleData;

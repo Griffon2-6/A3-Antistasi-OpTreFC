@@ -1,5 +1,7 @@
 // In map template description.ext use:
 // #include "MissionDescription\CfgSoundsContents.hpp"
+#include "..\Scripts\ttsxg26_optre\soundDefinitions.hpp"
+
 class fire
 {
 	name="fire";
