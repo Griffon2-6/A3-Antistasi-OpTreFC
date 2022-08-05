@@ -57,6 +57,7 @@ if (A3A_hasOpTre && _vehicleType == "OPTRE_HEV") then           // Special handl
 
     } forEach _vehicles;
 
+    _cargoGroup spawn A3A_fnc_attackDrillAI;
     private _cargoWP1 = _cargoGroup addWaypoint [_posDestination, 0];
     _cargoWP1 setWaypointType "SAD";
     _cargoWP1 setWaypointBehaviour "COMBAT";

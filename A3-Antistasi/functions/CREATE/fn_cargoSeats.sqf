@@ -26,7 +26,11 @@ if (_cargoSeats < 7) exitWith			// fudge for Warrior
 
 private _squad = call {
 	if (_isMilitia) exitWith { selectRandom groupsFIASquad };
-	if (_sideX == Occupants) then { selectRandom groupsNATOSquad } else {selectRandom groupsCSATSquad };
+	if (_sideX == Occupants) then { 
+		if (tierWar > 4 && A3A_hasOpTre) then {
+			selectRandom groupsUNSCSquad
+		} else {selectRandom groupsNATOSquad}
+	} else {selectRandom groupsCSATSquad };
 };
 if (_cargoSeats == 7) then { _squad deleteAt 7 };
 _squad;

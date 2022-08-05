@@ -17,7 +17,7 @@ _posOrigin = getMarkerPos _airportX;
 _sideX = if (sidesX getVariable [_airportX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
 
 private _taskId = "DEF_HQ" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[format ["Enemy knows our HQ coordinates. They have sent a SpecOp Squad in order to kill %1. Intercept them and kill them. Or you may move our HQ 1Km away so they will loose track",name petros],format ["Defend %1",name petros],respawnTeamPlayer],_positionX,true,10,true,"Defend",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[format ["Enemy knows our HQ coordinates. They have sent a SpecOp Squad in order to kill %1. Intercept them and kill them. Or you may move our HQ 1Km away so they will lose track",name petros],format ["Defend %1",name petros],respawnTeamPlayer],_positionX,true,10,true,"Defend",true] call BIS_fnc_taskCreate;
 [[_sideX],_taskId+"B",[format ["We know %2 HQ coordinates. We have sent a SpecOp Squad in order to kill his leader %1. Help the SpecOp team",name petros, nameTeamPlayer],format ["Kill %1",name petros],respawnTeamPlayer],_positionX,true,10,true,"Attack",true] call BIS_fnc_taskCreate;
 [_taskId, "DEF_HQ", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
@@ -59,7 +59,12 @@ for "_i" from 0 to (round random 2) do
 	_vehiclesX pushBack _heli;
 
 	{_x setBehaviour "CARELESS";} forEach units _groupHeli;
-	_groupX = [_posOrigin, _sideX, _typeGroup] call A3A_fnc_spawnGroup;
+	_groupX = if (A3A_hasOpTre && _sideX == Occupants && _i == 0) then {
+		// For Operation Trebuchet, ensure first group is Spartan team
+		[_posOrigin, _sideX, selectRandom groupsUNSCSpartanTeam] call A3A_fnc_spawnGroup
+	} else {
+		[_posOrigin, _sideX, _typeGroup] call A3A_fnc_spawnGroup
+	};
 	{_x assignAsCargo _heli; _x moveInCargo _heli; _soldiers pushBack _x; [_x] call A3A_fnc_NATOinit} forEach units _groupX;
 	_groups pushBack _groupX;
 	//[_heli,"Air Transport"] spawn A3A_fnc_inmuneConvoy;

@@ -79,7 +79,7 @@
 
 //Minefield definition
 //Not Magazine type would be: ["APERSBoundingMine", "APERSMine", "ATMine"]
-["minefieldAT", ["ATMine"]] call _fnc_saveToTemplate;
+["minefieldAT", ["UNSCMine"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["APERSMine"]] call _fnc_saveToTemplate;
 
 //PvP definitions
@@ -101,19 +101,20 @@ _loadoutData setVariable ["marksmanRifles", []];
 _loadoutData setVariable ["sniperRifles", []];
 
 _loadoutData setVariable ["lightATLaunchers", [
-["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAT", "OPTRE_M41_Twin_HEAP"], [], ""],
-["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HE", "OPTRE_M41_Twin_HEAT"], [], ""],
-["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAP", "OPTRE_M41_Twin_HEAT"], [], ""]
+["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAT", "OPTRE_M41_Twin_HE"], [], ""],
+["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAT", "OPTRE_M41_Twin_HEAT"], [], ""]
 ]]; 			//this line determines light AT launchers -- Example: ["launch_NLAW_F"] -- Array, can contain multiple assets
 _loadoutData setVariable ["ATLaunchers", [
-["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAT_SALH", "OPTRE_M41_Twin_HEAT_SALH"], [], ""],
+["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAT", "OPTRE_M41_Twin_HEAT_SACLOS"], [], ""],
 ["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAT_SACLOS", "OPTRE_M41_Twin_HEAT_SACLOS"], [], ""]
 ]]; 				//this line determines light AT launchers -- Example: ["launch_NLAW_F"] -- Array, can contain multiple assets
 _loadoutData setVariable ["missileATLaunchers", [
-["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAT_G", "OPTRE_M41_Twin_HEAT_G"], [], ""]
+["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAP", "OPTRE_M41_Twin_HEAT_SACLOS"], [], ""],
+["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAT_SACLOS", "OPTRE_M41_Twin_HEAT_Thermal"], [], ""],
+["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HEAP", "OPTRE_M41_Twin_HEAT_Thermal"], [], ""]
 ]]; 		//this line determines missile AT launchers -- Example: ["launch_B_Titan_short_F"] -- Array, can contain multiple assets
 _loadoutData setVariable ["AALaunchers", [
-["launch_B_Titan_tna_F", "", "acc_pointer_IR", "", ["Titan_AA"], [], ""]
+["OPTRE_M41_SSR", "", "", "", ["OPTRE_M41_Twin_HE_Thermal_ProximityFuse"], [], ""]
 ]];
 _loadoutData setVariable ["sidearms", []];
 
@@ -142,10 +143,31 @@ _loadoutData setVariable ["Rangefinder", ["OPTRE_Smartfinder"]];
 _loadoutData setVariable ["uniforms", []];
 _loadoutData setVariable ["vests", []];
 _loadoutData setVariable ["Hvests", []];
+_loadoutData setVariable ["SLvests", []];
+_loadoutData setVariable ["medicvests", []];
 _loadoutData setVariable ["GLvests", []];
+_loadoutData setVariable ["EEvests", []];
+_loadoutData setVariable ["engvests", []];
+_loadoutData setVariable ["latvests", []];
+_loadoutData setVariable ["atvests", []];
+_loadoutData setVariable ["aavests", []];
+_loadoutData setVariable ["mgvests", []];
+_loadoutData setVariable ["marksmanvests", []];
+_loadoutData setVariable ["snipervests", []];
 _loadoutData setVariable ["backpacks", []];
 _loadoutData setVariable ["longRangeRadios", []];
 _loadoutData setVariable ["helmets", []];
+_loadoutData setVariable ["SLhelmets", []];
+_loadoutData setVariable ["medichelmets", []];
+_loadoutData setVariable ["GLhelmets", []];
+_loadoutData setVariable ["EEhelmets", []];
+_loadoutData setVariable ["enghelmets", []];
+_loadoutData setVariable ["lathelmets", []];
+_loadoutData setVariable ["athelmets", []];
+_loadoutData setVariable ["aahelmets", []];
+_loadoutData setVariable ["mghelmets", []];
+_loadoutData setVariable ["marksmanhelmets", []];
+_loadoutData setVariable ["sniperhelmets", []];
 
 //Item *set* definitions. These are added in their entirety to unit loadouts. No randomisation is applied.
 _loadoutData setVariable ["items_medical_basic", ["BASIC"] call A3A_fnc_itemset_medicalSupplies];
@@ -171,6 +193,63 @@ _loadoutData setVariable ["items_crew_extras", []];
 _loadoutData setVariable ["items_unarmed_extras", []];
 
 //TODO - ACE overrides for misc essentials, medical and engineer gear
+
+///////////////////////////////////////
+//    	Spartan Loadout Data    	 //
+///////////////////////////////////////
+
+private _spartanLoadoutData = _loadoutData call _fnc_copyLoadoutData;
+_spartanLoadoutData setVariable ["uniforms", ["OPTRE_MJOLNIR_Undersuit"]];
+_spartanLoadoutData setVariable ["backpacks", []];
+// Hack for getting Mjolnir armor color to match helmet color while still having somewhat random colors for Spartans:
+// - Create array of colors
+// - For each role, sample randomly from color array without replacement and assign to role
+// - Colors are resampled for every session, giving the appearance that mapping between role and color is random
+private _colors = ["", "_Black", "_Caboose", "_Church", "_Donut", "_Simmons", "_Olive", "_Grif", "_Sarge", "_Tucker", "_Night", "_Freeman"]; 			// Include underscores since default green armor has no suffix. Yes, color names are a bit weird (Halo 5 Guardians references)?
+private _classes = ["SL", "", "medic", "GL", "EE", "eng", "lat", "at", "aa", "mg", "marksman", "sniper"];
+{
+	_color = selectRandom _colors;
+	_colors = _colors - [_color];
+	_spartanLoadoutData setVariable [_x + "vests", ["OPTRE_FC_MJOLNIR_MKV_Armor" + _color]];
+	_spartanLoadoutData setVariable [_x + "helmets", ["OPTRE_FC_MJOLNIR_MKV_Helmet" + _color]];
+} forEach _classes;
+_spartanLoadoutData setVariable ["binoculars", ["OPTRE_Smartfinder"]];
+_loadoutData setVariable ["items_engineer_extras", ["Toolkit", "MineDetector", "OPTRE_FC_BubbleShield"]];
+
+_spartanLoadoutData setVariable ["rifles", [
+["OPTRE_MA5B", "", "", "OPTRE_MA5_SmartLink", ["OPTRE_60Rnd_762x51_Mag", "OPTRE_60Rnd_762x51_Mag", "OPTRE_60Rnd_762x51_Mag_Tracer_Yellow"], [], ""],
+["OPTRE_BR55HB", "", "", "OPTRE_BR55HB_Scope", ["OPTRE_36Rnd_95x40_Mag", "OPTRE_36Rnd_95x40_Mag", "OPTRE_36Rnd_95x40_Mag_Tracer_Yellow"], [], ""]
+]];
+_spartanLoadoutData setVariable ["carbines", [
+["OPTRE_MA5K", "", "", "OPTRE_M393_EOTECH", ["OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag_Tracer_Yellow"], [], ""]
+]];
+_spartanLoadoutData setVariable ["grenadeLaunchers", [
+["OPTRE_MA5BGL", "", "", "OPTRE_MA5_SmartLink", ["OPTRE_60Rnd_762x51_Mag", "OPTRE_60Rnd_762x51_Mag", "OPTRE_60Rnd_762x51_Mag_Tracer_Yellow"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
+]];
+_spartanLoadoutData setVariable ["SMGs", [
+["OPTRE_M7", "", "", "OPTRE_M7_Sight", [], [], ""]
+]];
+_spartanLoadoutData setVariable ["machineGuns", [
+["OPTRE_M73", "", "", "OPTRE_M393_EOTECH", ["OPTRE_100Rnd_95x40_Box", "OPTRE_100Rnd_95x40_Box", "OPTRE_100Rnd_95x40_Box_Tracer_Yellow"], [], "bipod_01_F_blk"],
+["OPTRE_M73", "", "", "OPTRE_M393_ACOG", ["OPTRE_100Rnd_95x40_Box", "OPTRE_100Rnd_95x40_Box", "OPTRE_100Rnd_95x40_Box_Tracer_Yellow"], [], "bipod_01_F_blk"],
+["OPTRE_M247", "", "", "OPTRE_M393_EOTECH", ["OPTRE_100Rnd_762x51_Box", "OPTRE_100Rnd_762x51_Box", "OPTRE_100Rnd_762x51_Box_Tracer_Yellow", "OPTRE_400Rnd_762x51_Box_Tracer"], [], "bipod_01_F_blk"],
+["OPTRE_M247", "", "", "OPTRE_M393_ACOG", ["OPTRE_100Rnd_762x51_Box", "OPTRE_100Rnd_762x51_Box", "OPTRE_100Rnd_762x51_Box_Tracer_Yellow", "OPTRE_400Rnd_762x51_Box_Tracer"], [], "bipod_01_F_blk"]
+]];
+_spartanLoadoutData setVariable ["marksmanRifles", [
+["OPTRE_M392_DMR", "", "OPTRE_BMR_Laser", "OPTRE_M392_Scope", [], [], "bipod_01_F_blk"],
+["OPTRE_M393_DMR", "", "OPTRE_BMR_Laser", "OPTRE_M393_Scope", [], [], "bipod_01_F_blk"],
+["OPTRE_M393_DMR", "", "OPTRE_BMR_Laser", "OPTRE_M393_ACOG", [], [], "bipod_01_F_blk"]
+]];
+_spartanLoadoutData setVariable ["sniperRifles", [
+["OPTRE_SRS99D", "", "", "OPTRE_SRS99_Scope", ["OPTRE_4Rnd_145x114_APFSDS_Mag", "OPTRE_4Rnd_145x114_APFSDS_Mag", "OPTRE_4Rnd_145x114_HVAP_Mag"], [], ""],
+["OPTRE_FC_Railgun", "", "", "", [], [], ""]
+]];
+_spartanLoadoutData setVariable ["sidearms", [
+["OPTRE_M6C", "", "OPTRE_M6C_Laser", "OPTRE_M6C_Scope", [], [], ""],
+["OPTRE_M6G", "", "OPTRE_M6G_Flashlight", "OPTRE_M6G_Scope", [], [], ""],
+["OPTRE_M319m", "", "", "", [], [], ""],
+["OPTRE_M7_Folded", "", "", "OPTRE_M7_Sight", [], [], ""]
+]];
 
 ///////////////////////////////////////
 //    Special Forces Loadout Data    //
@@ -219,14 +298,13 @@ _sfLoadoutData setVariable ["sidearms", [
 ["OPTRE_M6C", "OPTRE_M6_silencer", "OPTRE_M6C_Laser", "OPTRE_M6C_Scope", [], [], ""],
 ["OPTRE_M6C", "OPTRE_M6C_compensator", "OPTRE_M6C_Laser", "OPTRE_M6C_Scope", [], [], ""],
 ["OPTRE_M6G", "OPTRE_M6_silencer", "OPTRE_M6G_Flashlight", "OPTRE_M6G_Scope", [], [], ""],
-["optre_hgun_comet_f", "", "", "", [], [], ""],
-["OPTRE_M319m", "", "", "", [], [], ""]
+["optre_hgun_comet_f", "", "", "", [], [], ""]
 ]];
 /////////////////////////////////
 //    Military Loadout Data    //
 /////////////////////////////////
 private _militaryLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_militaryLoadoutData setVariable ["uniforms", ["OPTRE_UNSC_Army_Uniform_TRO", "OPTRE_UNSC_Army_Uniform_R_TRO"]];
+_militaryLoadoutData setVariable ["uniforms", ["OPTRE_UNSC_Marine_Uniform", "OPTRE_UNSC_Marine_Uniform_R"]];
 _militaryLoadoutData setVariable ["backpacks", ["OPTRE_UNSC_Rucksack", "OPTRE_UNSC_Rucksack_Heavy", "OPTRE_UNSC_Backpack"]];
 _militaryLoadoutData setVariable ["vests", ["OPTRE_UNSC_M52A_Armor_Rifleman_MAR", "OPTRE_UNSC_M52A_Armor_Marksman_MAR"]];
 _militaryLoadoutData setVariable ["Hvests", ["OPTRE_UNSC_M52A_Armor_TL_MAR"]];
@@ -340,8 +418,8 @@ _pilotLoadoutData setVariable ["helmets", ["OPTRE_UNSC_CH252_Helmet2_Vacuum_URB"
 //However, these exist in case you really do want to do a lot of custom alterations.
 
 private _squadLeaderTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	[["Hvests", "vests"] call _fnc_fallback] call _fnc_setVest;
+	[["SLhelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["SLvests", "Hvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 
 	["backpacks"] call _fnc_setBackpack;
@@ -395,8 +473,8 @@ private _riflemanTemplate = {
 };
 
 private _medicTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	[["Hvests", "vests"] call _fnc_fallback] call _fnc_setVest;
+	[["medichelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["medicvests", "Hvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
   	[selectRandom ["carbines", "smgs"]] call _fnc_setPrimary;
@@ -419,7 +497,7 @@ private _medicTemplate = {
 };
 
 private _grenadierTemplate = {
-	["helmets"] call _fnc_setHelmet;
+	[["GLhelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
 	[["GLvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
@@ -445,8 +523,8 @@ private _grenadierTemplate = {
 };
 
 private _explosivesExpertTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	[["GLvests", "vests"] call _fnc_fallback] call _fnc_setVest;
+	[["EEhelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["EEvests", "GLvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
@@ -477,8 +555,8 @@ private _explosivesExpertTemplate = {
 };
 
 private _engineerTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	["vests"] call _fnc_setVest;
+	[["enghelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["engvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
@@ -505,8 +583,8 @@ private _engineerTemplate = {
 };
 
 private _latTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	["vests"] call _fnc_setVest;
+	[["lathelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["latvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
@@ -534,8 +612,8 @@ private _latTemplate = {
 };
 
 private _atTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	["vests"] call _fnc_setVest;
+	[["athelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["atvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
@@ -563,8 +641,8 @@ private _atTemplate = {
 };
 
 private _aaTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	["vests"] call _fnc_setVest;
+	[["aahelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["aavests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
@@ -592,8 +670,8 @@ private _aaTemplate = {
 };
 
 private _machineGunnerTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	["vests"] call _fnc_setVest;
+	[["mghelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["mgvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 	["backpacks"] call _fnc_setBackpack;
 
@@ -617,8 +695,8 @@ private _machineGunnerTemplate = {
 };
 
 private _marksmanTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	["vests"] call _fnc_setVest;
+	[["marksmanhelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["marksmanvests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 
 
@@ -643,8 +721,8 @@ private _marksmanTemplate = {
 };
 
 private _sniperTemplate = {
-	["helmets"] call _fnc_setHelmet;
-	["vests"] call _fnc_setVest;
+	[["sniperhelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
+	[["snipervests", "vests"] call _fnc_fallback] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 
 
@@ -761,6 +839,27 @@ private _traitorTemplate = {
 //  You shouldn't touch below this line unless you really really know what you're doing.
 //  Things below here can and will break the gamemode if improperly changed.
 ////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////
+//  	Spartan Units      //
+/////////////////////////////
+private _prefix = "spartan";
+private _unitTypes = [
+	["SquadLeader", _squadLeaderTemplate],
+	["Rifleman", _riflemanTemplate],
+	["Medic", _medicTemplate, [["medic", true]]],
+	["Engineer", _engineerTemplate, [["engineer", true]]],
+	["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]]],
+	["Grenadier", _grenadierTemplate],
+	["LAT", _latTemplate],
+	["AT", _atTemplate],
+	["AA", _aaTemplate],
+	["MachineGunner", _machineGunnerTemplate],
+	["Marksman", _marksmanTemplate],
+	["Sniper", _sniperTemplate]
+];
+
+[_prefix, _unitTypes, _spartanLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 
 /////////////////////////////
 //  Special Forces Units   //

@@ -44,7 +44,24 @@ private _baseUnitClass = switch (true) do {
 	};
 };
 
-private _unitClassMap = if (_side isNotEqualTo independent) then { createHashMap } else { //TODO: define HashMaps for other sides to implement OpTre Spartans and Jackals
+private _unitClassMap = if (_side isNotEqualTo independent) then { 
+	if (A3A_hasOpTre) then {
+		if (_side isEqualTo west) then {
+			createHashMapFromArray [
+				[toLower "spartan_SquadLeader", "OPTRE_Spartan2_Soldier_TeamLeader"],
+				[toLower "spartan_Rifleman", "OPTRE_Spartan2_Soldier_Rifleman_BR"],
+				[toLower "spartan_Medic", "OPTRE_Spartan2_Soldier_Corpsman"],
+				[toLower "spartan_Grenadier", "OPTRE_Spartan2_Soldier_Rifleman_AR"],
+				[toLower "spartan_ExplosivesExpert", "OPTRE_Spartan2_Soldier_Engineer"],
+				[toLower "spartan_Engineer", "OPTRE_Spartan2_Soldier_Engineer"],
+				[toLower "spartan_LAT", "OPTRE_Spartan2_Soldier_Rifleman_AT"],
+				[toLower "spartan_AT", "OPTRE_Spartan2_Soldier_Rifleman_AT"],
+				[toLower "spartan_AA", "OPTRE_Spartan2_Soldier_Rifleman_AT"],
+				[toLower "spartan_MachineGunner", "OPTRE_Spartan2_Soldier_Automatic_Rifleman"],
+				[toLower "spartan_Marksman", "OPTRE_Spartan2_Soldier_Marksman"],
+				[toLower "spartan_Sniper", "OPTRE_Spartan2_Soldier_Scout_Sniper"]]		
+		} else {createHashMap}
+	} else {createHashMap} } else { //TODO: define HashMaps for other sides to implement OpTre Jackals
 	createHashMapFromArray [				// Cases matter. Lower case here because allVariables on namespace returns lowercase
 		["militia_unarmed", "I_G_Survivor_F"],
 		["militia_rifleman", "I_G_Soldier_F"],
@@ -71,6 +88,7 @@ private _allDefinitions = _faction getVariable "loadouts";
 	private _loadoutName = _x;
 	private _definition = _allDefinitions getVariable _loadoutName;
 	private _unitClass = _unitClassMap getOrDefault [_loadoutName, _baseUnitClass];
+	//diag_log format ["_loadoutName: %1, _unitClass: %2", _loadoutName, _unitClass];
 	[_loadoutsPrefix + _loadoutName, _definition + [_unitClass]] call A3A_fnc_registerUnitType;
 } forEach allVariables _allDefinitions;
 
@@ -336,6 +354,44 @@ if (_side isEqualTo west) then {
 			"loadouts_occ_military_Rifleman",
 			"loadouts_occ_military_Medic"
 		];
+	};
+
+	if (A3A_hasOpTre) then {
+		private _spartanLoadouts = ["loadouts_occ_spartan_SquadLeader", "loadouts_occ_spartan_Rifleman", "loadouts_occ_spartan_Medic",
+				"loadouts_occ_spartan_Grenadier", "loadouts_occ_spartan_ExplosivesExpert", "loadouts_occ_spartan_Engineer",
+				"loadouts_occ_spartan_LAT", "loadouts_occ_spartan_AT", "loadouts_occ_spartan_AA", 
+				"loadouts_occ_spartan_MachineGunner", "loadouts_occ_spartan_Marksman", "loadouts_occ_spartan_Sniper"];
+
+		private _spartanLoadoutsTemp = _spartanLoadouts;
+		groupsUNSCSquadwSpartan = [];
+		for "_i" from 1 to 5 do {
+			private _spartan = selectRandom _spartanLoadoutsTemp;
+			_spartanLoadoutsTemp = _spartanLoadoutsTemp - [_spartan];
+			groupsUNSCSquadwSpartan pushBack [
+				_spartan,
+				"loadouts_occ_military_SquadLeader",
+				selectRandomWeighted ["loadouts_occ_military_LAT", 2, "loadouts_occ_military_MachineGunner", 1],
+				selectRandomWeighted ["loadouts_occ_military_MachineGunner", 2, "loadouts_occ_military_Marksman", 1],
+				selectRandomWeighted ["loadouts_occ_military_Rifleman", 4, "loadouts_occ_military_AT", 1],
+				selectRandomWeighted ["loadouts_occ_military_AA", 1, "loadouts_occ_military_Engineer", 4],
+				"loadouts_occ_military_Rifleman",
+				"loadouts_occ_military_Medic"
+			];
+		};
+
+		groupsUNSCSquad = groupsNATOSquad + groupsUNSCSquadwSpartan;
+		
+		groupsUNSCSpartanTeam = [];
+		for "_i" from 1 to 5 do {
+			private _spartanLoadoutsTemp = _spartanLoadouts;
+			private _spartanTeam = [];
+			for "_j" from 1 to 4 do {
+				private _spartan = selectRandom _spartanLoadoutsTemp;
+				_spartanLoadoutsTemp = _spartanLoadoutsTemp - [_spartan];
+				_spartanTeam pushBack _spartan;
+			};
+			groupsUNSCSpartanTeam pushBack _spartanTeam;
+		};
 	};
 
 	NATOSquad = groupsNATOSquad select 0;

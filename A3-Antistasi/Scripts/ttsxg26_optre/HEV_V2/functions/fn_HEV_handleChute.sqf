@@ -46,7 +46,7 @@ while {((getPosATL _HEV) select 2) > 30} do {
 waitUntil {((getPosATL _HEV) select 2) < 100};
 
 detach _chute;
-_chute addForce [[random 10, random 10, 1], [0, 0, 0]]
+_chute addForce [[random 10, random 10, 1], [0, 0, 0]];
 if (_hasPilot && isPlayer (gunner _HEV)) then {
 	["pod_detach"] remoteExec ["playSound", gunner _HEV];
 };
