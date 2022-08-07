@@ -59,8 +59,33 @@ private _unitClassMap = if (_side isNotEqualTo independent) then {
 				[toLower "spartan_AA", "OPTRE_Spartan2_Soldier_Rifleman_AT"],
 				[toLower "spartan_MachineGunner", "OPTRE_Spartan2_Soldier_Automatic_Rifleman"],
 				[toLower "spartan_Marksman", "OPTRE_Spartan2_Soldier_Marksman"],
-				[toLower "spartan_Sniper", "OPTRE_Spartan2_Soldier_Scout_Sniper"]]		
-		} else {createHashMap}
+				[toLower "spartan_Sniper", "OPTRE_Spartan2_Soldier_Scout_Sniper"]
+				]		
+		} else {
+			if (_side isEqualTo east) then {
+				createHashMapFromArray [
+					["military_rifleman", "OPTRE_Jackal_F"],
+					["military_medic", "OPTRE_Jackal_F"],
+					["military_explosivesexpert", "OPTRE_Jackal_F"],
+					["military_engineer", "OPTRE_Jackal_F"],
+					["military_lat", "OPTRE_Jackal_F"],
+					["military_marksman", "OPTRE_Jackal_F"],
+					["military_sniper", "OPTRE_Jackal_F"],
+					["militia_rifleman", "OPTRE_Jackal_F"],
+					["militia_medic", "OPTRE_Jackal_F"],
+					["militia_grenadier", "OPTRE_Jackal_F"],
+					["militia_explosivesexpert", "OPTRE_Jackal_F"],
+					["militia_engineer", "OPTRE_Jackal_F"],
+					["militia_lat", "OPTRE_Jackal_F"],
+					["militia_at", "OPTRE_Jackal_F"],
+					["militia_aa", "OPTRE_Jackal_F"],
+					["militia_marksman", "OPTRE_Jackal_F"],
+					["militia_sniper", "OPTRE_Jackal_F"],
+					["police_squadleader", "OPTRE_Jackal_F"],
+					["police_standard", "OPTRE_Jackal_F"]
+				]
+			} else {createHashMap}
+		}
 	} else {createHashMap} } else { //TODO: define HashMaps for other sides to implement OpTre Jackals
 	createHashMapFromArray [				// Cases matter. Lower case here because allVariables on namespace returns lowercase
 		["militia_unarmed", "I_G_Survivor_F"],

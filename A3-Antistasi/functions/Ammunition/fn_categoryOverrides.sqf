@@ -165,7 +165,12 @@ private _categoryOverrideTable = [
 ["LIB_GrWr34_Barrel", ["StaticWeaponParts","Items"]],
 ["LIB_GrWr34_Barrel_g", ["StaticWeaponParts","Items"]],
 ["LIB_M2_60_Tripod", ["StaticWeaponParts","Items"]],
-["LIB_M2_60_Barrel", ["StaticWeaponParts","Items"]]   ];
+["LIB_M2_60_Barrel", ["StaticWeaponParts","Items"]],
+
+// OPTRE
+
+["OPTRE_FC_T50_SRS", ["SniperRifles","Weapons"]],
+["OPTRE_FC_Jackal_Shield", ["SMGs","Weapons"]]   ];
 
 //Create a local namespace. Should only run on the server.
 categoryOverrides = false call A3A_fnc_createNamespace;

@@ -242,7 +242,8 @@ _spartanLoadoutData setVariable ["marksmanRifles", [
 ]];
 _spartanLoadoutData setVariable ["sniperRifles", [
 ["OPTRE_SRS99D", "", "", "OPTRE_SRS99_Scope", ["OPTRE_4Rnd_145x114_APFSDS_Mag", "OPTRE_4Rnd_145x114_APFSDS_Mag", "OPTRE_4Rnd_145x114_HVAP_Mag"], [], ""],
-["OPTRE_FC_Railgun", "", "", "", [], [], ""]
+["OPTRE_FC_Railgun", "", "", "", [], [], ""],
+["OPTRE_M99A2S3", "", "", "", ["OPTRE_7Rnd_20mm_APFSDS_Mag", "OPTRE_7Rnd_20mm_APFSDS_Mag", "OPTRE_7Rnd_20mm_HEDP_Mag"], [], ""]
 ]];
 _spartanLoadoutData setVariable ["sidearms", [
 ["OPTRE_M6C", "", "OPTRE_M6C_Laser", "OPTRE_M6C_Scope", [], [], ""],
