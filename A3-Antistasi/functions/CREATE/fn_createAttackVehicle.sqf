@@ -27,22 +27,21 @@ private "_cargoGroup";
 
 if (A3A_hasOpTre && _vehicleType == "OPTRE_HEV") then           // Special handling for OpTre ODST drop (should probably be a distinct support type in the future)
 {
-    //[petros, "income", "Sending ODST QRF"] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
-    private _nPods = 6;                                         // Number of ODST pods, should scale with tierWar in future
+    sleep (30 + random 90);
+    private _nPods = if (tierWar <= 5) then {4} else {if (tierWar <= 8) then {8} else {12}};                               // Number of ODST pods
     private _vehicles = [];
     for "_i" from 1 to _nPods do 
     {
         _vehicles pushBack (createVehicle [_vehicleType, getMarkerPos _markerOrigin, [], 5, "CAN_COLLIDE"]);
     };
-    //[petros, "income",  ("_vehicles = " + format ["%1", _vehicles])] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
     _vehicle = _vehicles select 0;
     private _groupType = groupsUNSCODSTQRF;
     _groupType resize _nPods;
     _crewGroup = grpNull;
     _cargoGroup = [getMarkerPos _markerOrigin, _side, _groupType, true, false] call A3A_fnc_spawnGroup;
 
-    private _defaultLandPos = _posDestination getPos [random 150, random 360];
-    _landPos = [_posDestination, 0, 150, 15, 0, 0, 0, [], [_defaultLandPos,_defaultLandPos]] call BIS_fnc_findSafePos;
+    private _defaultLandPos = _posDestination getPos [random 150, random 360];                  // Random position about target location within circle of radius 150 m
+    _landPos = [_posDestination, 0, 150, 15, 0, 0, 0, [], [_defaultLandPos,_defaultLandPos]] call BIS_fnc_findSafePos;      // Try to find a safe position for drop. If one cannot be found, just choose random position, chances are, it'll be good enough.
 
     {
         ((units _cargoGroup) select _forEachIndex) assignAsGunner _x;

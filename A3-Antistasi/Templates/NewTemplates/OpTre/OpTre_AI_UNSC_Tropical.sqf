@@ -257,7 +257,7 @@ _spartanLoadoutData setVariable ["sidearms", [
 ///////////////////////////////////////
 
 private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_sfLoadoutData setVariable ["uniforms", ["OPTRE_UNSC_Army_Uniform_OLITRO_SlimLeg", "OPTRE_UNSC_Army_Uniform_OLI_SlimLeg"]];
+_sfLoadoutData setVariable ["uniforms", ["OPTRE_UNSC_Army_Uniform_OLITRO_SlimLeg"]];
 _sfLoadoutData setVariable ["vests", ["OPTRE_UNSC_M52D_Armor", "OPTRE_UNSC_M52D_Armor_Rifleman", "OPTRE_UNSC_M52D_Armor_Light"]];
 _sfLoadoutData setVariable ["backpacks", ["OPTRE_ILCS_Rucksack_Black", "OPTRE_ILCS_Rucksack_Heavy", "OPTRE_ILCS_Rucksack_Heavy_M73"]];
 _sfLoadoutData setVariable ["helmets", ["OPTRE_UNSC_CH252D_Helmet"]];
@@ -374,13 +374,13 @@ _militiaLoadoutData setVariable ["helmets", ["OPTRE_UNSC_CH252_Helmet_WDL"]];
 _militiaLoadoutData setVariable ["backpacks", ["B_AssaultPack_rgr", "B_Kitbag_rgr", "B_Carryall_oli"]];
 
 _militiaLoadoutData setVariable ["rifles", [
-["OPTRE_MA37", "", "", "OPTRE_MA37_Smartlink_Scope", ["OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag_Tracer_Yellow"], [], ""]
+["OPTRE_MA37", "", "", "", ["OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag_Tracer_Yellow"], [], ""]
 ]];
 _militiaLoadoutData setVariable ["carbines", [
 ["OPTRE_MA37K", "", "OPTRE_M45_Flashlight", "", ["OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag_Tracer_Yellow"], [], ""]
 ]];
 _militiaLoadoutData setVariable ["grenadeLaunchers", [
-["OPTRE_MA37GL", "", "", "OPTRE_MA37_Smartlink_Scope", ["OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag_Tracer_Yellow"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
+["OPTRE_MA37GL", "", "", "", ["OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag", "OPTRE_32Rnd_762x51_Mag_Tracer_Yellow"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
 ]];
 _militiaLoadoutData setVariable ["smgs", [
 ["OPTRE_M7", "", "", "", [], [], ""]

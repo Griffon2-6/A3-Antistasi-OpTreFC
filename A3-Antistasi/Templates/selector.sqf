@@ -69,6 +69,14 @@ A3A_Reb_template = switch(true) do {
                 ["Templates\NewTemplates\OpTre\OpTre_Reb_INS_Arid.sqf", independent] call A3A_fnc_compatibilityLoadFaction;
             };
         };
+        // Workaround for use of "allowDamage" in various places rendering OPTRE power armor useless - 
+        // spawn script that disables damage for any units with remaining power armor energy
+        0 spawn {
+            while {true} do {
+                {if (_x getVariable ["optre_suit_energy", -1] > 0) then {_x allowDamage false}} forEach allUnits;
+                sleep 10;
+            };
+        };
         "OpTre"
     };
     /* disabled until imtegrated

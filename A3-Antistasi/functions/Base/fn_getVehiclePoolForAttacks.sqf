@@ -19,260 +19,523 @@ private _vehicleSelection = [];
 
 Debug_2("Now searching for attack vehicle pool for %1 with filter %2", _side, _filter);
 //In general is Invaders always a bit less chill than the occupants, they will use heavier vehicles more often and earlier
-switch (tierWar) do
+if (A3A_hasOpTre) then
 {
-    case (1):
+    switch (tierWar) do
     {
-        if(_side == Occupants) then
+        case (1):
         {
-            _vehicleSelection =
-            [
-                [vehNATOLightArmed, 15],
-                [vehNATOTrucks, 10],
-                [vehNATOPatrolHeli, 25],
-                [vehNATOAPC, 35],
-                [vehNATOTransportHelis, 15]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOLightArmed, 15],
+                    [vehNATOTrucks, 10],
+                    [vehNATOPatrolHeli, 25],
+                    [vehNATOAPC, 35],
+                    [vehNATOTransportHelis, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATTrucks, 5],
+                    [vehCSATLightArmed, 15],
+                    [vehCSATPatrolHeli, 25],
+                    [vehCSATAPC, 30],
+                    [vehCSATTransportHelis, 25]
+                ];
+            };
         };
-        if(_side == Invaders) then
+        case (2):
         {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 5],
-                [vehCSATLightArmed, 15],
-                [vehCSATPatrolHeli, 25],
-                [vehCSATAPC, 30],
-                [vehCSATTransportHelis, 25]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOLightArmed, 15],
+                    [vehNATOPatrolHeli, 25],
+                    [vehNATOAPC, 40],
+                    [vehNATOTransportHelis, 20]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATPatrolHeli, 15],
+                    [vehCSATAPC, 40],
+                    [vehCSATTransportHelis, 35],
+                    [vehCSATAA, 10]
+                ];
+            };
+        };
+        case (3):
+        {
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOPatrolHeli, 15],
+                    [vehNATOAPC, 30],
+                    [vehNATOTransportHelis, 35],
+                    ["OPTRE_HEV", 10],
+                    [vehNATOTank, 10]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATPatrolHeli, 5],
+                    [vehCSATAPC, 35],
+                    [vehCSATTransportHelis, 30],
+                    [vehCSATAA, 15],
+                    [vehCSATAttackHelis, 15]
+                ];
+            };
+        };
+        case (4):
+        {
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 30],
+                    [vehNATOTransportHelis, 30],
+                    [vehNATOTank, 10],
+                    ["OPTRE_HEV", 15],
+                    [vehNATOAttackHelis, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 15],
+                    [vehCSATTransportHelis, 15],
+                    [vehCSATAA, 15],
+                    [vehCSATAttackHelis, 20],
+                    [vehCSATTank, 15],
+                    [vehCSATTransportPlanes, 20]
+                ];
+            };
+        };
+        case (5):
+        {
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 20],
+                    [vehNATOTransportHelis, 20],
+                    ["OPTRE_HEV", 20],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 15],
+                    [vehCSATTransportHelis, 10],
+                    [vehCSATAA, 15],
+                    [vehCSATAttackHelis, 15],
+                    [vehCSATTank, 20],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
+        };
+        case (6):
+        {
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 15],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 15],
+                    ["OPTRE_HEV", 20]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATTransportHelis, 5],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 20],
+                    [vehCSATTank, 20],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
+        };
+        case (7):
+        {
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 10],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 20],
+                    ["OPTRE_HEV", 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 25],
+                    [vehCSATTank, 25],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
+        };
+        case (8):
+        {
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 10],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 20],
+                    ["OPTRE_HEV", 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 25],
+                    [vehCSATTank, 25],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
+        };
+        case (9):
+        {
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 10],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 20],
+                    ["OPTRE_HEV", 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 25],
+                    [vehCSATTank, 25],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
+        };
+        case (10):
+        {
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 10],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 20],
+                    ["OPTRE_HEV", 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 25],
+                    [vehCSATTank, 25],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
         };
     };
-    case (2):
+} else {
+    switch (tierWar) do
     {
-        if(_side == Occupants) then
+        case (1):
         {
-            _vehicleSelection =
-            [
-                [vehNATOLightArmed, 15],
-                [vehNATOPatrolHeli, 25],
-                [vehNATOAPC, 40],
-                [vehNATOTransportHelis, 20]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOLightArmed, 15],
+                    [vehNATOTrucks, 10],
+                    [vehNATOPatrolHeli, 25],
+                    [vehNATOAPC, 35],
+                    [vehNATOTransportHelis, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATTrucks, 5],
+                    [vehCSATLightArmed, 15],
+                    [vehCSATPatrolHeli, 25],
+                    [vehCSATAPC, 30],
+                    [vehCSATTransportHelis, 25]
+                ];
+            };
         };
-        if(_side == Invaders) then
+        case (2):
         {
-            _vehicleSelection =
-            [
-                [vehCSATPatrolHeli, 15],
-                [vehCSATAPC, 40],
-                [vehCSATTransportHelis, 35],
-                [vehCSATAA, 10]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOLightArmed, 15],
+                    [vehNATOPatrolHeli, 25],
+                    [vehNATOAPC, 40],
+                    [vehNATOTransportHelis, 20]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATPatrolHeli, 15],
+                    [vehCSATAPC, 40],
+                    [vehCSATTransportHelis, 35],
+                    [vehCSATAA, 10]
+                ];
+            };
         };
-    };
-    case (3):
-    {
-        if(_side == Occupants) then
+        case (3):
         {
-            _vehicleSelection =
-            [
-                [vehNATOPatrolHeli, 15],
-                [vehNATOAPC, 35],
-                [vehNATOTransportHelis, 40],
-                [vehNATOAA, 10]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOPatrolHeli, 15],
+                    [vehNATOAPC, 35],
+                    [vehNATOTransportHelis, 40],
+                    [vehNATOAA, 10]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATPatrolHeli, 5],
+                    [vehCSATAPC, 35],
+                    [vehCSATTransportHelis, 30],
+                    [vehCSATAA, 15],
+                    [vehCSATAttackHelis, 15]
+                ];
+            };
         };
-        if(_side == Invaders) then
+        case (4):
         {
-            _vehicleSelection =
-            [
-                [vehCSATPatrolHeli, 5],
-                [vehCSATAPC, 35],
-                [vehCSATTransportHelis, 30],
-                [vehCSATAA, 15],
-                [vehCSATAttackHelis, 15]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 30],
+                    [vehNATOTransportHelis, 40],
+                    [vehNATOAA, 15],
+                    [vehNATOAttackHelis, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 15],
+                    [vehCSATTransportHelis, 15],
+                    [vehCSATAA, 15],
+                    [vehCSATAttackHelis, 20],
+                    [vehCSATTank, 15],
+                    [vehCSATTransportPlanes, 20]
+                ];
+            };
         };
-    };
-    case (4):
-    {
-        if(_side == Occupants) then
+        case (5):
         {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 30],
-                [vehNATOTransportHelis, 40],
-                [vehNATOAA, 15],
-                [vehNATOAttackHelis, 15]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 20],
+                    [vehNATOTransportHelis, 20],
+                    [vehNATOAA, 15],
+                    [vehNATOAttackHelis, 30],
+                    [vehNATOTank, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 15],
+                    [vehCSATTransportHelis, 10],
+                    [vehCSATAA, 15],
+                    [vehCSATAttackHelis, 15],
+                    [vehCSATTank, 20],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
         };
-        if(_side == Invaders) then
+        case (6):
         {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 15],
-                [vehCSATTransportHelis, 15],
-                [vehCSATAA, 15],
-                [vehCSATAttackHelis, 20],
-                [vehCSATTank, 15],
-                [vehCSATTransportPlanes, 20]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 15],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 10],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 15],
+                    [vehNATOTransportPlanes, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATTransportHelis, 5],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 20],
+                    [vehCSATTank, 20],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
         };
-    };
-    case (5):
-    {
-        if(_side == Occupants) then
+        case (7):
         {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 20],
-                [vehNATOTransportHelis, 20],
-                [vehNATOAA, 15],
-                [vehNATOAttackHelis, 30],
-                [vehNATOTank, 15]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 10],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 20],
+                    [vehNATOTransportPlanes, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 25],
+                    [vehCSATTank, 25],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
         };
-        if(_side == Invaders) then
+        case (8):
         {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 15],
-                [vehCSATTransportHelis, 10],
-                [vehCSATAA, 15],
-                [vehCSATAttackHelis, 15],
-                [vehCSATTank, 20],
-                [vehCSATTransportPlanes, 15]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 10],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 20],
+                    [vehNATOTransportPlanes, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 25],
+                    [vehCSATTank, 25],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
         };
-    };
-    case (6):
-    {
-        if(_side == Occupants) then
+        case (9):
         {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 15],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 10],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 15],
-                [vehNATOTransportPlanes, 15]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 10],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 20],
+                    [vehNATOTransportPlanes, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 25],
+                    [vehCSATTank, 25],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
         };
-        if(_side == Invaders) then
+        case (10):
         {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATTransportHelis, 5],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 20],
-                [vehCSATTank, 20],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
-    };
-    case (7):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 10],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 5],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 20],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 25],
-                [vehCSATTank, 25],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
-    };
-    case (8):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 10],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 5],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 20],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 25],
-                [vehCSATTank, 25],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
-    };
-    case (9):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 10],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 5],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 20],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 25],
-                [vehCSATTank, 25],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
-    };
-    case (10):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 10],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 5],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 20],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 25],
-                [vehCSATTank, 25],
-                [vehCSATTransportPlanes, 15]
-            ];
+            if(_side == Occupants) then
+            {
+                _vehicleSelection =
+                [
+                    [vehNATOAPC, 10],
+                    [vehNATOTransportHelis, 10],
+                    [vehNATOAA, 5],
+                    [vehNATOAttackHelis, 20],
+                    [vehNATOTank, 20],
+                    [vehNATOTransportPlanes, 15]
+                ];
+            };
+            if(_side == Invaders) then
+            {
+                _vehicleSelection =
+                [
+                    [vehCSATAPC, 10],
+                    [vehCSATAA, 10],
+                    [vehCSATAttackHelis, 25],
+                    [vehCSATTank, 25],
+                    [vehCSATTransportPlanes, 15]
+                ];
+            };
         };
     };
 };

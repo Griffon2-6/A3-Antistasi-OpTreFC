@@ -30,13 +30,12 @@ if (A3A_hasOpTre) then
             {
                 _vehicleSelection =
                 [
-                    ["OPTRE_HEV", 100]
-                    // [vehPoliceCar, 40],
-                    // [vehFIACar, 30],
-                    // [vehFIATruck, 20],
-                    // [vehFIAArmedCar, 10],
+                    [vehPoliceCar, 40],
+                    [vehFIACar, 30],
+                    [vehFIATruck, 20],
+                    [vehFIAArmedCar, 10],
 
-                    // [vehNATOPatrolHeli, 100]
+                    [vehNATOPatrolHeli, 100]
                 ];
             };
             if(_side == Invaders) then
@@ -58,17 +57,15 @@ if (A3A_hasOpTre) then
             {
                 _vehicleSelection =
                 [
-                    ["OPTRE_HEV", 100]
+                    [vehPoliceCar, 15],
+                    [vehFIACar, 15],
+                    [vehFIAArmedCar, 10],
+                    [vehFIATruck, 10],
+                    [vehNATOLightUnarmed, 15],
+                    [vehNATOTrucks, 25],
+                    [vehNATOLightArmed, 10],
 
-                    // [vehPoliceCar, 15],
-                    // [vehFIACar, 15],
-                    // [vehFIAArmedCar, 10],
-                    // [vehFIATruck, 10],
-                    // [vehNATOLightUnarmed, 15],
-                    // [vehNATOTrucks, 25],
-                    // [vehNATOLightArmed, 10],
-
-                    // [vehNATOPatrolHeli, 100]
+                    [vehNATOPatrolHeli, 100]
                 ];
             };
             if(_side == Invaders) then
@@ -92,17 +89,16 @@ if (A3A_hasOpTre) then
             {
                 _vehicleSelection =
                 [
-                    ["OPTRE_HEV", 100]
+                    [vehFIAArmedCar, 10],
+                    [vehFIATruck, 10],
+                    [vehNATOLightUnarmed, 10],
+                    [vehNATOLightArmed, 20],
+                    [vehNATOTrucks, 40],
+                    [vehNATOAPC, 10],
 
-                    // [vehFIAArmedCar, 10],
-                    // [vehFIATruck, 10],
-                    // [vehNATOLightUnarmed, 10],
-                    // [vehNATOLightArmed, 20],
-                    // [vehNATOTrucks, 40],
-                    // [vehNATOAPC, 10],
-
-                    // [vehNATOPatrolHeli, 80],
-                    // [vehNATOTransportHelis, 20]
+                    [vehNATOPatrolHeli, 75],
+                    ["OPTRE_HEV", 10],
+                    [vehNATOTransportHelis, 15]
                 ];
             };
             if(_side == Invaders) then
@@ -130,8 +126,9 @@ if (A3A_hasOpTre) then
                     [vehNATOTrucks, 40],
                     [vehNATOAPC, 25],
 
-                    [vehNATOPatrolHeli, 50],
-                    [vehNATOTransportHelis, 50]
+                    [vehNATOPatrolHeli, 30],
+                    ["OPTRE_HEV", 30],
+                    [vehNATOTransportHelis, 40]
                 ];
             };
             if(_side == Invaders) then
@@ -161,8 +158,9 @@ if (A3A_hasOpTre) then
                     [vehNATOAPC, 35],
                     [vehNATOTank, 10],
 
-                    [vehNATOPatrolHeli, 30],
-                    [vehNATOTransportHelis, 60],
+                    [vehNATOPatrolHeli, 20],
+                    ["OPTRE_HEV", 40],
+                    [vehNATOTransportHelis, 40],
                     [vehNATOAttackHelis, 10]
                 ];
             };
@@ -194,9 +192,9 @@ if (A3A_hasOpTre) then
                     [vehNATOAPC, 45],
                     [vehNATOTank, 15],
 
-                    [vehNATOPatrolHeli, 20],
-                    [vehNATOTransportHelis, 60],
-                    [vehNATOTransportPlanes, 10],
+                    [vehNATOPatrolHeli, 10],
+                    [vehNATOTransportHelis, 40],
+                    ["OPTRE_HEV", 40],
                     [vehNATOAttackHelis, 10]
                 ];
             };
@@ -231,8 +229,8 @@ if (A3A_hasOpTre) then
                     [vehNATOTank, 15],
 
                     [vehNATOPatrolHeli, 10],
-                    [vehNATOTransportHelis, 55],
-                    [vehNATOTransportPlanes, 20],
+                    [vehNATOTransportHelis, 35],
+                    ["OPTRE_HEV", 40],
                     [vehNATOAttackHelis, 15]
                 ];
             };
@@ -267,8 +265,8 @@ if (A3A_hasOpTre) then
                     [vehNATOTank, 20],
 
                     [vehNATOPatrolHeli, 10],
-                    [vehNATOTransportHelis, 40],
-                    [vehNATOTransportPlanes, 25],
+                    [vehNATOTransportHelis, 30],
+                    ["OPTRE_HEV", 40],
                     [vehNATOAttackHelis, 20]
                 ];
             };
@@ -303,8 +301,8 @@ if (A3A_hasOpTre) then
                     [vehNATOTank, 25],
 
                     [vehNATOPatrolHeli, 5],
-                    [vehNATOTransportHelis, 35],
-                    [vehNATOTransportPlanes, 25],
+                    [vehNATOTransportHelis, 30],
+                    ["OPTRE_HEV", 40],
                     [vehNATOAttackHelis, 25]
                 ];
             };
@@ -339,8 +337,8 @@ if (A3A_hasOpTre) then
                     [vehNATOTank, 30],
 
                     [vehNATOPatrolHeli, 5],
-                    [vehNATOTransportHelis, 30],
-                    [vehNATOTransportPlanes, 25],
+                    [vehNATOTransportHelis, 25],
+                    ["OPTRE_HEV", 45],
                     [vehNATOAttackHelis, 25]
                 ];
             };
